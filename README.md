@@ -44,7 +44,7 @@ Deployment is achieved with PyInstaller
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](#) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/rjesquivias/Scrap-Magic/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
