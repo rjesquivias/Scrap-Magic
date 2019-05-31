@@ -16,7 +16,7 @@ class QueryManager():
         self._q = "" # text that will be searched for
         self._restrict_sr = 1 # 1 will search only in the provided subreddit, 0 will search all of reddit
         self._limit = 100 # limit the search results
-        self._sort = "new" # hot/new/comments/relevance/top
+        self._sort = "relevance" # hot/new/comments/relevance/top
         self._subreddit = ""
 
     def setSearchParam(self, query):
@@ -175,13 +175,23 @@ class MainWidget(QWidget):
             self.queryReddit(keywordList, subredditList)
 
     def queryReddit(self, keywordList, subredditList):
-        self.QManager.setSearchParam(keywordList[0])
+        keyWordString = ""
+        for keyword in keywordList:
+            keyWordString += keyword
+            keyWordString += "%20"
+
+        # remove last 3 characters
+        keyWordString = keyWordString[:-3]
+
+        self.QManager.setSearchParam(keyWordString)
         self.QManager.setSubreddit(subredditList[0])
         self.resultList = self.QManager.run()
         self.updateResultsBrowser()
 
     def updateResultsBrowser(self):
         self.resultsBrowser.setText("")
+
+        self.resultList.sort(key=lambda result: int(result['data']['score']), reverse=True)
         for result in self.resultList:
            self.resultsBrowser.append('Title: ' + str(result['data']['title']))
            self.resultsBrowser.append('Score: ' + str(result['data']['score']))
