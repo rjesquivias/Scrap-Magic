@@ -27,7 +27,7 @@ Clone repo
 git clone https://github.com/rjesquivias/Scrap-Magic.git
 ```
 
-If using IntelliJ(Recommended)
+If using PyCharm(Recommended)
 ```
 File->Settings->Project:Scrap-Magic->Project Interpretrr
 Add Interpreter and Package dependencies
