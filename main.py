@@ -54,18 +54,60 @@ class MainWindow(QMainWindow):
 
         fileMenu = self.menuBar().addMenu('File')
         themeMenu = self.menuBar().addMenu('Themes')
+        advancedSearchMenu = self.menuBar().addMenu('Advanced Search')
 
         saveButton = QAction('Save', self)
         saveButton.triggered.connect(self.saveResults)
         fileMenu.addAction(saveButton)
 
         toggleDefaultThemeButton = QAction('Default', self)
-        toggleDefaultThemeButton.triggered.connect(self.defaultTheme)
+        toggleDefaultThemeButton.setCheckable(True)
+        toggleDefaultThemeButton.toggled.connect(self.defaultTheme)
         themeMenu.addAction(toggleDefaultThemeButton)
 
         toggleNigerianButton = QAction('Nigerian', self)
-        toggleNigerianButton.triggered.connect(self.darkTheme)
+        toggleNigerianButton.setCheckable(True)
+        toggleNigerianButton.toggled.connect(self.darkTheme)
+        toggleNigerianButton.setChecked(True)
         themeMenu.addAction(toggleNigerianButton)
+
+        newSearchButton = QAction("New", self)
+        newSearchButton.setCheckable(True)
+        newSearchButton.toggled.connect(self.toggleAdvancedSearchType)
+        newSearchButton.setChecked(True)
+        advancedSearchMenu.addAction(newSearchButton)
+
+        topSearchButton = QAction("Top", self)
+        topSearchButton.setCheckable(True)
+        topSearchButton.toggled.connect(self.toggleAdvancedSearchType)
+        advancedSearchMenu.addAction(topSearchButton)
+
+        relevantSearchButton = QAction("Relevant", self)
+        relevantSearchButton.setCheckable(True)
+        relevantSearchButton.toggled.connect(self.toggleAdvancedSearchType)
+        advancedSearchMenu.addAction(relevantSearchButton)
+        advancedSearchMenu.addSeparator()
+
+        week = QAction("Week", self)
+        week.setCheckable(True)
+        week.toggled.connect(self.toggleAdvancedSearchType)
+        advancedSearchMenu.addAction(week)
+
+        month = QAction("Month", self)
+        month.setCheckable(True)
+        month.toggled.connect(self.toggleAdvancedSearchType)
+        advancedSearchMenu.addAction(month)
+
+        year = QAction("Year", self)
+        year.setCheckable(True)
+        year.toggled.connect(self.toggleAdvancedSearchType)
+        advancedSearchMenu.addAction(year)
+
+        allTime = QAction("All Time", self)
+        allTime.setCheckable(True)
+        allTime.toggled.connect(self.toggleAdvancedSearchType)
+        allTime.setChecked(True)
+        advancedSearchMenu.addAction(allTime)
 
         self.resize(1000, 400)
 
@@ -82,6 +124,11 @@ class MainWindow(QMainWindow):
             p = self.palette()
             p.setColor(self.backgroundRole(), Qt.white)
             self.setPalette(p)
+
+    def toggleAdvancedSearchType(self, checked):
+        action = self.sender()
+        print(action.text())
+        print(checked)
 
     # TODO
     def saveResults(self):
